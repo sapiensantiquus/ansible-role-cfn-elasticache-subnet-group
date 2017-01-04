@@ -1,0 +1,22 @@
+- name: Make dirs
+  file:
+    state: directory
+    path: "{{ item }}"
+  with_items:
+    - "{{ ec_sub_group_build_dir }}"
+
+- name: Template stack
+  template:
+    src: "{{ ec_sub_group_template }}"
+    dest: "{{ ec_sub_group_build_dir }}/{{ ec_sub_group_template }}"
+
+- name: Deploy cfn stack
+  cloudformation:
+    stack_name: "{{ ec_sub_group_stack_name }}"
+    state: "{{ ec_sub_group_stack_state | default('present') }}"
+    region: "{{ region }}"
+    template: "{{ ec_sub_group_build_dir }}/{{ ec_sub_group_template }}"
+    template_parameters:
+      VPCSubnetGroupIds: "{{ ec_vpc_sub_group_ids }}"
+      ECSubnetGroupDescription: "{{ ec_sub_group_description }}"
+      ECSubnetGroupName: "{{ ec_sub_group_name }}"

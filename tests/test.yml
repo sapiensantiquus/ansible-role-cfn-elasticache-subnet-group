@@ -1,0 +1,2 @@
+- include: default.yml
+- include: default.yml ec_sub_group_stack_state=absent

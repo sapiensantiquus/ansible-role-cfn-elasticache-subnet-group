@@ -1,0 +1,8 @@
+- hosts: test
+  vars:
+    ec_sub_group_stack_name: "{{ environ }}-{{ region }}-{{ ec_sub_group_name }}-stack"
+    ec_sub_group_description: "ElastiCache Subnet Group Ansible Role Test"
+    ec_sub_group_stack_description: "{{ ec_sub_group_description }} Stack"
+    ec_sub_group_name: "elasticache-ansible-role-test-subnet-group"
+  roles:
+    - role: ansible-role-cfn-elasticache-subnet-group

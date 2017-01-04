@@ -1,0 +1,18 @@
+Description: "{{ ec_sub_group_stack_description }}"
+Parameters:
+  VPCSubnetGroupIds:
+    Type: List<AWS::EC2::Subnet::Id>
+  ECSubnetGroupDescription:
+    Type: String
+  ECSubnetGroupName:
+    Type: String
+Resources:
+  SubnetGroup:
+    Type: "AWS::ElastiCache::SubnetGroup"
+    Properties:
+      Description:
+        Ref: "ECSubnetGroupDescription"
+      SubnetIds:
+        Ref: "VPCSubnetGroupIds"
+      CacheSubnetGroupName:
+        Ref: "ECSubnetGroupName"
